@@ -1,4 +1,4 @@
-package ru.dartik;
+package net.dunice;
 
 import java.util.Scanner;
 import java.util.stream.IntStream;

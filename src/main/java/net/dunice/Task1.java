@@ -1,4 +1,4 @@
-package ru.dartik;
+package net.dunice;
 
 import java.lang.constant.Constable;
 import java.util.ArrayList;
