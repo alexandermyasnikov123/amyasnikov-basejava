@@ -50,26 +50,14 @@ public final class CoffeeMachine {
         this.water = water;
     }
 
-    public int getWater() {
-        return water;
-    }
-
     public void fillMilk(int milk) {
         checkAmount(milk, maxMilkCapacity);
         this.milk = milk;
     }
 
-    public int getMilk() {
-        return milk;
-    }
-
     public void fillCoffeeBeans(int coffeeBeans) {
         checkAmount(coffeeBeans, maxCoffeeCapacity);
         this.coffeeBeans = coffeeBeans;
-    }
-
-    public int getCoffeeBeans() {
-        return coffeeBeans;
     }
 
     private boolean canMakeCoffee(Coffee coffee) {
