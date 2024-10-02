@@ -1,6 +1,9 @@
-package net.dunice;
+package net.dunice.first_tasks;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Scanner;
 
 public class Task2 {
     private static final int AMOUNT_OF_NUMBERS = 2;
@@ -23,8 +26,9 @@ public class Task2 {
 
     public static int findMax(Collection<Integer> collection) {
         int max = Integer.MIN_VALUE;
+
         for (var item : collection) {
-            if(item > max) max = item;
+            if (item > max) max = item;
         }
         return max;
     }

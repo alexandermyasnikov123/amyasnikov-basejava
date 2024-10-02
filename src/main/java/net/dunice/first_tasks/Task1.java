@@ -1,4 +1,6 @@
-package net.dunice;
+package net.dunice.first_tasks;
+
+import java.util.Arrays;
 
 public class Task1 {
     public static void main(String[] args) {
@@ -25,5 +27,10 @@ public class Task1 {
 
         System.out.println("Min double is " + Double.MIN_VALUE);
         System.out.println("Max double is " + Double.MAX_VALUE);
+
+        var someText = "Some text";
+        var numbers = new int[]{1, 2, 3, 4, 5};
+        System.out.println("String variable is " + someText);
+        System.out.println("Array variable is " + Arrays.toString(numbers));
     }
 }

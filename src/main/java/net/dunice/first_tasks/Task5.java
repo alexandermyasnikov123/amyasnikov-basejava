@@ -1,4 +1,4 @@
-package net.dunice;
+package net.dunice.first_tasks;
 
 import java.util.Scanner;
 

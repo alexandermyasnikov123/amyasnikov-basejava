@@ -1,4 +1,4 @@
-package net.dunice;
+package net.dunice.first_tasks;
 
 import java.util.Scanner;
 
@@ -18,10 +18,25 @@ public class Task3 {
             }
 
             for (int i = min; i <= max; ++i) {
-                System.out.println(i);
+                if(isPrime(i)) {
+                    System.out.println(i);
+                }
             }
         } catch (Exception e) {
             System.out.println("Use right number formatting");
         }
+    }
+
+    private static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
