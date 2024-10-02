@@ -46,18 +46,18 @@ public final class CoffeeMachine {
     }
 
     public void fillWater(int water) {
-        checkAmount(water, maxWaterCapacity);
-        this.water = water;
+        checkAmount(this.water + water, maxWaterCapacity);
+        this.water += water;
     }
 
     public void fillMilk(int milk) {
-        checkAmount(milk, maxMilkCapacity);
-        this.milk = milk;
+        checkAmount(this.milk + milk, maxMilkCapacity);
+        this.milk += milk;
     }
 
     public void fillCoffeeBeans(int coffeeBeans) {
-        checkAmount(coffeeBeans, maxCoffeeCapacity);
-        this.coffeeBeans = coffeeBeans;
+        checkAmount(this.coffeeBeans + coffeeBeans, maxCoffeeCapacity);
+        this.coffeeBeans += coffeeBeans;
     }
 
     private boolean canMakeCoffee(Coffee coffee) {
@@ -66,7 +66,7 @@ public final class CoffeeMachine {
     }
 
     public void makeCoffee(Coffee coffee) {
-        if(!isTurnedOn()) {
+        if (!isTurnedOn()) {
             throw new IllegalStateException("Enable coffee machine before usage");
         }
 
