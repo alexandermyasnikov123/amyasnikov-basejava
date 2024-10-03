@@ -5,8 +5,11 @@ import java.util.Scanner;
 
 public final class Coffee {
     private final int coffee;
+
     private final int milk;
+
     private final int water;
+
     private final String name;
 
     public Coffee(int coffee, int milk, int water, String name) {
@@ -51,17 +54,23 @@ public final class Coffee {
 
     public static Coffee inputNew(Scanner scanner) {
         System.out.print("Input coffee name: ");
+
         var inputName = scanner.next().trim();
         if (inputName.length() < 2) {
             throw new IllegalArgumentException("Name must consists of 2 letters.");
         }
+
         var name = StringUtils.capitalized(inputName);
+
         System.out.print("Input amount of milk: ");
         var milk = scanner.nextInt();
+
         System.out.print("Input amount of water: ");
         var water = scanner.nextInt();
+
         System.out.print("Input amount of beans: ");
         var beans = scanner.nextInt();
+
         return new Coffee(beans, milk, water, name);
     }
 }

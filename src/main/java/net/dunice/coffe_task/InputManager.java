@@ -11,21 +11,29 @@ import java.util.Set;
 
 public final class InputManager {
     private Scanner scanner;
+
     private final Coffee espresso = new Coffee(16, 12, 24, "Espresso");
+
     private final Coffee cappuccino = new Coffee(12, 15, 20, "Cappuccino");
+
     private final CoffeeMachine coffeeMachine = CoffeeMachine.withDefaultSettings();
+
     private final List<DescribedCommand> commands = new ArrayList<>();
+
     private final Set<Coffee> drinks = new HashSet<>();
 
     public InputManager(Scanner scanner) {
         this.scanner = scanner;
+
         drinks.add(espresso);
         drinks.add(cappuccino);
+
         initializeCommands();
     }
 
     public void greetUser() {
         System.out.println("Welcome to coffee machine CLI.");
+
         for (var item : commands) {
             System.out.println(item.getDescription());
         }

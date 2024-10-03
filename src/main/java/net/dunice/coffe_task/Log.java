@@ -5,7 +5,9 @@ import java.util.Date;
 
 public final class Log {
     private final Coffee coffee;
+
     private final int cups;
+
     private final Date date;
 
     public Log(Coffee coffee, int cups, Date date) {
