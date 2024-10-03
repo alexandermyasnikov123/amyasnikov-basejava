@@ -44,7 +44,8 @@ public final class Coffee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Coffee coffee1)) return false;
-        return coffee == coffee1.coffee && milk == coffee1.milk && water == coffee1.water && Objects.equals(name, coffee1.name);
+        return coffee == coffee1.coffee && milk == coffee1.milk &&
+               water == coffee1.water && Objects.equals(name, coffee1.name);
     }
 
     @Override
