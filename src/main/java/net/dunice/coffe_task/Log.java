@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public final class Log {
-    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy - HH:mm:ss");
-
     private final Coffee coffee;
     private final int cups;
     private final Date date;
@@ -18,6 +16,7 @@ public final class Log {
 
     @Override
     public String toString() {
-        return String.format("Log %1$s: %2$d cups of %3$s\n", DATE_FORMAT.format(date), cups, coffee.getName());
+        var dateFormat = new SimpleDateFormat("dd MMMM yyyy - HH:mm:ss");
+        return String.format("Log %1$s: %2$d cups of %3$s\n", dateFormat.format(date), cups, coffee.getName());
     }
 }

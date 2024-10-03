@@ -2,18 +2,25 @@ package net.dunice.coffe_task;
 
 import net.dunice.coffe_task.commands.DescribedCommand;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 
 public final class InputManager {
     private Scanner scanner;
+    private final Coffee espresso = new Coffee(16, 12, 24, "Espresso");
+    private final Coffee cappuccino = new Coffee(12, 15, 20, "Cappuccino");
     private final CoffeeMachine coffeeMachine = CoffeeMachine.withDefaultSettings();
     private final List<DescribedCommand> commands = new ArrayList<>();
     private final Set<Coffee> drinks = new HashSet<>();
 
     public InputManager(Scanner scanner) {
         this.scanner = scanner;
-        drinks.add(Coffee.ESPRESSO);
-        drinks.add(Coffee.CAPPUCCINO);
+        drinks.add(espresso);
+        drinks.add(cappuccino);
         initializeCommands();
     }
 
@@ -29,7 +36,7 @@ public final class InputManager {
             var index = scanner.nextInt();
             commands.get(index).invoke();
         } catch (InputMismatchException e) {
-            System.out.println("You can input only integer values");
+            System.out.println("You can input only allowed values!");
             scanner = new Scanner(System.in);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Enter only valid commands!");
@@ -38,10 +45,14 @@ public final class InputManager {
         }
     }
 
+    private void makeCoffee(Coffee coffee, int cups) {
+        coffeeMachine.makeCoffee(coffee, cups);
+        System.out.println("Enjoy your delicious " + coffee.getName() + "!");
+    }
+
     private void makeCoffee(Coffee coffee) {
         System.out.print("Input amount of cups: ");
-        coffeeMachine.makeCoffee(coffee, scanner.nextInt());
-        System.out.println("Enjoy your delicious " + coffee.getName() + "!");
+        makeCoffee(coffee, scanner.nextInt());
     }
 
     private Coffee findCoffee(String name) {
@@ -114,16 +125,16 @@ public final class InputManager {
         commands.add(new DescribedCommand(() -> System.out.println(coffeeMachine),
                 "7 - Show machine data (milk, water, beans)"));
 
-        commands.add(new DescribedCommand(() -> makeCoffee(Coffee.ESPRESSO),
+        commands.add(new DescribedCommand(() -> makeCoffee(espresso),
                 "8 - Make espresso"));
 
-        commands.add(new DescribedCommand(() -> makeCoffee(Coffee.CAPPUCCINO),
+        commands.add(new DescribedCommand(() -> makeCoffee(cappuccino),
                 "9 - Make cappuccino"));
 
         commands.add(new DescribedCommand(() -> {
             var coffee = Coffee.inputNew(scanner);
             drinks.add(coffee);
-            makeCoffee(coffee);
+            makeCoffee(coffee, 3);
         }, "10 - Make 3 cups of custom drink"));
 
         commands.add(new DescribedCommand(() -> {

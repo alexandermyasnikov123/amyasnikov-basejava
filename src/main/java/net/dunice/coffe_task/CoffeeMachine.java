@@ -1,20 +1,19 @@
 package net.dunice.coffe_task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public final class CoffeeMachine {
-    private static final int DEFAULT_MAX_COFFEE = 150;
-    private static final int DEFAULT_MAX_MILK = 300;
-    private static final int DEFAULT_MAX_WATER = 600;
-    private static final int DEFAULT_MAX_USAGE = 3;
-
     private final int maxCoffeeCapacity;
     private final int maxMilkCapacity;
     private final int maxWaterCapacity;
     private final int maxUsage;
 
-    private int usage;
     private boolean isTurnedOn;
+    private int usage;
     private int coffeeBeans;
     private int milk;
     private int water;
@@ -29,7 +28,11 @@ public final class CoffeeMachine {
     }
 
     public static CoffeeMachine withDefaultSettings() {
-        return new CoffeeMachine(DEFAULT_MAX_COFFEE, DEFAULT_MAX_MILK, DEFAULT_MAX_WATER, DEFAULT_MAX_USAGE);
+        var defaultMaxCoffee = 150;
+        var defaultMaxMilk = 300;
+        var defaultMaxWater = 600;
+        var defaultMaxUsage = 3;
+        return new CoffeeMachine(defaultMaxCoffee, defaultMaxMilk, defaultMaxWater, defaultMaxUsage);
     }
 
     public void toggleTurnedOn() {
@@ -41,7 +44,7 @@ public final class CoffeeMachine {
     }
 
     public void checkAmount(int amount, int limit) {
-        if(amount <= 0) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("Value must be greater than zero");
         }
 
@@ -74,8 +77,8 @@ public final class CoffeeMachine {
             throw new IllegalStateException("Can't make coffee using dirty machine! Clear before use.");
         }
 
-        var canMakeCoffee = (water >= coffee.getWater() * cups) && (milk >= coffee.getMilk() * cups)
-                            && (coffeeBeans >= coffee.getBeans() * cups);
+        var canMakeCoffee = water >= coffee.getWater() * cups && milk >= coffee.getMilk() * cups &&
+                            coffeeBeans >= coffee.getBeans() * cups;
         if (!canMakeCoffee) {
             throw new IllegalStateException("Not enough ingredients for coffee " + coffee.getName());
         }

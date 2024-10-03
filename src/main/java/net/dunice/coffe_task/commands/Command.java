@@ -4,4 +4,3 @@ package net.dunice.coffe_task.commands;
 public interface Command {
     void invoke();
 }
-

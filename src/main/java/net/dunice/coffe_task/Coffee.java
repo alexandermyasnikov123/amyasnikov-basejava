@@ -4,14 +4,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public final class Coffee {
-    public final static Coffee CAPPUCCINO = new Coffee(12, 15, 20, "Cappuccino");
-    public final static Coffee ESPRESSO = new Coffee(16, 12, 24, "Espresso");
-
     private final int coffee;
     private final int milk;
     private final int water;
     private final String name;
-    private CoffeeType coffeeType = CoffeeType.GROUND;
 
     public Coffee(int coffee, int milk, int water, String name) {
         this.coffee = coffee;
@@ -67,13 +63,5 @@ public final class Coffee {
         System.out.print("Input amount of beans: ");
         var beans = scanner.nextInt();
         return new Coffee(beans, milk, water, name);
-    }
-
-    public CoffeeType getCoffeeType() {
-        return coffeeType;
-    }
-
-    public void setCoffeeType(CoffeeType coffeeType) {
-        this.coffeeType = coffeeType;
     }
 }
