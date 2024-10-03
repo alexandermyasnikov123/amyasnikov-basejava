@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class Task6Coffee {
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) {
         var scanner = new Scanner(System.in);
         var manager = new InputManager(scanner);
-        do {
+        while (true) {
             manager.greetUser();
-        } while (manager.handleInput(scanner.nextInt()));
+            manager.handleInput(scanner.nextInt());
+        }
     }
 }

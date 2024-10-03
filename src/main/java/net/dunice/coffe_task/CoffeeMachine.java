@@ -1,5 +1,7 @@
 package net.dunice.coffe_task;
 
+import java.util.*;
+
 public final class CoffeeMachine {
     private static final int DEFAULT_MAX_COFFEE = 150;
     private static final int DEFAULT_MAX_MILK = 300;
@@ -17,6 +19,8 @@ public final class CoffeeMachine {
     private int milk;
     private int water;
 
+    private final List<Log> logs = new ArrayList<>();
+
     public CoffeeMachine(int maxCoffeeCapacity, int maxMilkCapacity, int maxWaterCapacity, int maxUsage) {
         this.maxCoffeeCapacity = maxCoffeeCapacity;
         this.maxMilkCapacity = maxMilkCapacity;
@@ -24,8 +28,8 @@ public final class CoffeeMachine {
         this.maxUsage = maxUsage;
     }
 
-    public CoffeeMachine() {
-        this(DEFAULT_MAX_COFFEE, DEFAULT_MAX_MILK, DEFAULT_MAX_WATER, DEFAULT_MAX_USAGE);
+    public static CoffeeMachine withDefaultSettings() {
+        return new CoffeeMachine(DEFAULT_MAX_COFFEE, DEFAULT_MAX_MILK, DEFAULT_MAX_WATER, DEFAULT_MAX_USAGE);
     }
 
     public void toggleTurnedOn() {
@@ -38,10 +42,7 @@ public final class CoffeeMachine {
 
     public void checkAmount(int amount, int limit) {
         if (amount <= 0 || amount > limit) {
-            throw new IllegalArgumentException("""
-                                                       Value must be greater than zero and
-                                                       less than limited amount:
-                                                       """ + limit);
+            throw new IllegalArgumentException("Value must be greater than zero and less than limited amount: " + limit);
         }
     }
 
@@ -60,12 +61,7 @@ public final class CoffeeMachine {
         this.coffeeBeans += coffeeBeans;
     }
 
-    private boolean canMakeCoffee(Coffee coffee) {
-        return water >= coffee.getWater() && milk >= coffee.getMilk()
-               && coffeeBeans >= coffee.getBeans();
-    }
-
-    public void makeCoffee(Coffee coffee) {
+    private void checkCanMakeCoffee(Coffee coffee, int cups) {
         if (!isTurnedOn()) {
             throw new IllegalStateException("Enable coffee machine before usage");
         }
@@ -74,18 +70,30 @@ public final class CoffeeMachine {
             throw new IllegalStateException("Can't make coffee using dirty machine! Clear before use.");
         }
 
-        if (!canMakeCoffee(coffee)) {
-            throw new IllegalStateException("Not enough ingredients for coffee " + coffee.name());
+        var canMakeCoffee = (water >= coffee.getWater() * cups) && (milk >= coffee.getMilk() * cups)
+                            && (coffeeBeans >= coffee.getBeans() * cups);
+        if (!canMakeCoffee) {
+            throw new IllegalStateException("Not enough ingredients for coffee " + coffee.getName());
         }
+    }
 
-        water -= coffee.getWater();
-        milk -= coffee.getMilk();
-        coffeeBeans -= coffee.getBeans();
-        ++usage;
+    public void makeCoffee(Coffee coffee, int cups) {
+        checkCanMakeCoffee(coffee, cups);
+
+        water -= coffee.getWater() * cups;
+        milk -= coffee.getMilk() * cups;
+        coffeeBeans -= coffee.getBeans() * cups;
+        usage += cups;
+
+        logs.add(new Log(coffee, cups, new Date()));
+    }
+
+    public Collection<Log> getLogs() {
+        return Collections.unmodifiableList(logs);
     }
 
     public boolean shouldBeCleaned() {
-        return usage == maxUsage;
+        return usage >= maxUsage;
     }
 
     public void clean() {
