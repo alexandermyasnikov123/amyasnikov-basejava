@@ -11,6 +11,7 @@ public final class Coffee {
     private final int milk;
     private final int water;
     private final String name;
+    private CoffeeType coffeeType = CoffeeType.GROUND;
 
     public Coffee(int coffee, int milk, int water, String name) {
         this.coffee = coffee;
@@ -55,7 +56,7 @@ public final class Coffee {
     public static Coffee inputNew(Scanner scanner) {
         System.out.print("Input coffee name: ");
         var inputName = scanner.next().trim();
-        if(inputName.length() < 2) {
+        if (inputName.length() < 2) {
             throw new IllegalArgumentException("Name must consists of 2 letters.");
         }
         var name = StringUtils.capitalized(inputName);
@@ -66,5 +67,13 @@ public final class Coffee {
         System.out.print("Input amount of beans: ");
         var beans = scanner.nextInt();
         return new Coffee(beans, milk, water, name);
+    }
+
+    public CoffeeType getCoffeeType() {
+        return coffeeType;
+    }
+
+    public void setCoffeeType(CoffeeType coffeeType) {
+        this.coffeeType = coffeeType;
     }
 }
