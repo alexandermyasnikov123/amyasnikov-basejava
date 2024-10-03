@@ -8,14 +8,21 @@ import java.util.List;
 
 public final class CoffeeMachine {
     private final int maxCoffeeCapacity;
+
     private final int maxMilkCapacity;
+
     private final int maxWaterCapacity;
+
     private final int maxUsage;
 
     private boolean isTurnedOn;
+
     private int usage;
+
     private int coffeeBeans;
+
     private int milk;
+
     private int water;
 
     private final List<Log> logs = new ArrayList<>();
@@ -32,6 +39,7 @@ public final class CoffeeMachine {
         var defaultMaxMilk = 300;
         var defaultMaxWater = 600;
         var defaultMaxUsage = 3;
+
         return new CoffeeMachine(defaultMaxCoffee, defaultMaxMilk, defaultMaxWater, defaultMaxUsage);
     }
 
