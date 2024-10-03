@@ -5,7 +5,7 @@ import net.dunice.coffe_task.commands.DescribedCommand;
 import java.util.*;
 
 public final class InputManager {
-    private final Scanner scanner;
+    private Scanner scanner;
     private final CoffeeMachine coffeeMachine = CoffeeMachine.withDefaultSettings();
     private final List<DescribedCommand> commands = new ArrayList<>();
     private final Set<Coffee> drinks = new HashSet<>();
@@ -24,9 +24,13 @@ public final class InputManager {
         }
     }
 
-    public void handleInput(int input) {
+    public void handleInput() {
         try {
-            commands.get(input).invoke();
+            var index = scanner.nextInt();
+            commands.get(index).invoke();
+        } catch (InputMismatchException e) {
+            System.out.println("You can input only integer values");
+            scanner = new Scanner(System.in);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Enter only valid commands!");
         } catch (Exception e) {

@@ -10,7 +10,7 @@ public class Task6Coffee {
         var manager = new InputManager(scanner);
         while (true) {
             manager.greetUser();
-            manager.handleInput(scanner.nextInt());
+            manager.handleInput();
         }
     }
 }
