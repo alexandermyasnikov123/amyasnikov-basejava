@@ -41,8 +41,12 @@ public final class CoffeeMachine {
     }
 
     public void checkAmount(int amount, int limit) {
-        if (amount <= 0 || amount > limit) {
-            throw new IllegalArgumentException("Value must be greater than zero and less than limited amount: " + limit);
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Value must be greater than zero");
+        }
+
+        if (amount > limit) {
+            throw new IllegalArgumentException("Can't add more items. Limit is " + limit);
         }
     }
 
